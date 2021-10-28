@@ -1,6 +1,1 @@
-[submodule "ORB_SLAM3_Fixed"]
-	path = ORB_SLAM3_Fixed
-	url = https://github.com/shanpenghui/ORB_SLAM3_Fixed.git
-[submodule "ORB_SLAM3"]
-	path = ORB_SLAM3
-	url = https://github.com/shanpenghui/ORB_SLAM3_Fixed.git
+
