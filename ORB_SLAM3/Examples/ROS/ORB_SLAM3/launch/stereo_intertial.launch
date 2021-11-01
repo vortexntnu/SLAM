@@ -1,0 +1,15 @@
+<?xml version="1.0"?> 
+
+<launch>     
+    <!--Remaps the topics -->
+    <remap from="/zed2/zed_node/left/image_rect_color"  to="$/camera/left/image_raw" />
+    <remap from="/zed2/zed_node/right/image_rect_color"  to="/camera/left/image_raw" />
+    <remap from="imu/data_raw"  to="imu" />
+
+  <!-- Start DSO and ros wrapper -->
+  <node pkg="ORB_SLAM3" type="Stereo_Inertial" name="ORB_SLAM3_node" output="screen"
+ args="/$(env HOME)/SLAM/ORB_SLAM3/Vocabulary/ORBvoc.txt /$(env HOME)/SLAM/ORB_SLAM3/Examples/Stereo/EuRoC.yaml true">
+  </node>
+
+
+</launch>

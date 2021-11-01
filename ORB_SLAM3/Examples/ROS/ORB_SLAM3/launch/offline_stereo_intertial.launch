@@ -1,0 +1,27 @@
+<?xml version="1.0"?> 
+
+<!-- 
+<param name="/use_sim_time" value="true" />
+
+This node allows for selecting bag file while launching, usage - roslaunch ORB_SLAM3 offline_stereo.launch bag_filename:=
+<node pkg="rosbag" type="play" name="rosbag" required="true" args="$(arg bag_filename)"/> 
+--> 
+
+<launch>     
+    <remap from="/imu/data_raw" to="imu"/>
+
+    <!-- Decompresser -->
+    <node name="republisher" type="republish" pkg="image_transport" respawn="true"  output="screen" 
+args="compressed in:=/zed2/zed_node/left/image_rect_color raw out:=/camera/left/image_raw"/> 
+
+    <node name="republisher2" type="republish" pkg="image_transport" respawn="true" output="screen" 
+args="compressed in:=/zed2/zed_node/right/image_rect_color raw out:=/camera/right/image_raw"/> 
+
+
+  <!-- Run ORB_SLAM3 Stereo Interial node -->
+  <node pkg="ORB_SLAM3" type="Stereo_Inertial" name="ORB_SLAM3_node" output="screen"
+ args="/$(env HOME)/SLAM/ORB_SLAM3/Vocabulary/ORBvoc.txt /$(env HOME)/SLAM/ORB_SLAM3/Examples/Stereo-Inertial/zed2_inertial.yaml true">
+  </node>
+
+
+</launch>
