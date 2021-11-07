@@ -3,7 +3,7 @@
 <!-- 
 <param name="/use_sim_time" value="true" />
 
-This node allows for selecting bag file while launching, usage - roslaunch ORB_SLAM3 offline_stereo.launch bag_filename:=
+This node allows for selecting bag file while launching, usage - roslaunch ORB_SLAM3 offline_stereo.launch bag_filename:=/home/vortex/bagfiles/spy_and_qr.bag
 <node pkg="rosbag" type="play" name="rosbag" required="true" args="$(arg bag_filename)"/> 
 --> 
 
