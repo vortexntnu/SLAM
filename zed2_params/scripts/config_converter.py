@@ -1,7 +1,7 @@
 
 
 
-#Gir alle linjuene i en textfil som en liste med elementer
+
 def readFromFile(filename):
     with open(filename,'r') as f:
         lines = f.readlines()
@@ -12,7 +12,7 @@ def makeNewConfig(newFilename,configuredData):
         for i in range(len(configuredData)):
             f.write(configuredData[i])
 
-#Må lokalisere relevant data
+
 
 
 def stringToIntList(string):
@@ -22,7 +22,7 @@ def stringToIntList(string):
     return list(mapObject)
 
 
-#print(int_list)
+
 
 def findUpdatedDataLeftCamera(newData):
 
@@ -63,53 +63,11 @@ def findUpdatedDataRightCamera(newData):
 
  return cx,cy,fx,fy,k1,k2,k3,p1,p2
 
-"""
-s = "cx=951.469"
-print(s[3:])
-
-a = s[3:]
-print(s.replace(s[3:],"1"))
-
-"""
-
-
-"""
-def inputUpdatedDataLeftCamera(newData, oldData):
-    fx,fy,cx,cy,k1,k2,k3,p1,p2 = findUpdatedDataLeftCamera(newData)
-     #Checkinng if VGA
-    if (int(newData[20])==672):
-      cxLine = oldData[35]
-      oldData[35] = cxLine.replace(cxLine[3:],str(cx))
-
-      cyLine = oldData[36]
-      oldData[36] = cyLine.replace(cyLine[3:],str(cy))
-
-      fxLine = oldData[37]
-      oldData[37] = fxLine.replace(fxLine[3:],str(fx))
-
-      fyLine = oldData[38]
-      oldData[38] = fyLine.replace(fyLine[3:],str(fy))
-
-      k1Line = oldData[39]
-      oldData[39] = k1Line.replace(k1Line[3:],str(k1))
-
-      k2Line = oldData[40]
-      oldData[40] = k2Line.replace(k2Line[3:],str(k2))
-
-      k3Line = oldData[41]
-      oldData[41] = k3Line.replace(k3Line[3:],str(k3))
-
-      p1Line = oldData[42]
-      oldData[42] = p1Line.replace(p1Line[3:],str(p1))
-
-      p2Line = oldData[43]
-      oldData[43] = p2Line.replace(p2Line[3:],str(p2))
-"""
 
 
 def inputUpdatedDataLeftCamera(newData, oldData):
     paramList = list(findUpdatedDataLeftCamera(newData))
-        #Checkinng if VGA
+        #Checking if VGA
     if (int(newData[20])==672):
         startLine = 35 #Starting element in converted file
         for i in range(len(paramList)):
