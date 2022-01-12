@@ -1,6 +1,11 @@
 
+import argparse
 
-
+parser = argparse.ArgumentParser(description = "Making a new config file based on an old zed calib file and a new ros calib file.\nThe result will be a new config file in the correct format.")
+parser.add_argument("old", type=str, help="Old zed calib file")
+parser.add_argument("new", type=str, help="New ros calib file")
+parser.add_argument("updated", type=str, help="New updated filename")
+args = parser.parse_args()
 
 def readFromFile(filename):
     with open(filename,'r') as f:
@@ -12,15 +17,11 @@ def makeNewConfig(newFilename,configuredData):
         for i in range(len(configuredData)):
             f.write(configuredData[i])
 
-
-
-
 def stringToIntList(string):
     aList = string.split()
     mapObject = map(float, aList)
 
     return list(mapObject)
-
 
 
 
@@ -67,7 +68,7 @@ def findUpdatedDataRightCamera(newData):
 
 def inputUpdatedDataLeftCamera(newData, oldData):
     paramList = list(findUpdatedDataLeftCamera(newData))
-        #Checking if VGA
+        #Checkinng if VGA
     if (int(newData[20])==672):
         startLine = 35 #Starting element in converted file
         for i in range(len(paramList)):
@@ -129,28 +130,18 @@ def inputUpdatedDataRightCamera(newData, oldData):
             dataLine = oldData[startLine+i]
             oldData[startLine+i] = dataLine.replace(dataLine[3:],str(paramList[i])+"\n")
 
-     
-
     
-
-
 
 def main():
 
-
-    newData = readFromFile("NewData.txt")
-    oldData = readFromFile("OldData.txt")
-
-    print(oldData)
+    newData = readFromFile(args.new)
+    oldData = readFromFile(args.old)
    
     inputUpdatedDataLeftCamera(newData, oldData)
     inputUpdatedDataRightCamera(newData, oldData)
-    print(" ")
-    print(oldData)
 
- 
-
-    makeNewConfig("newConfig.txt",oldData)
+    makeNewConfig(args.updated,oldData)
+    
 
 
 main()
