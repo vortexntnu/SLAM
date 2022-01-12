@@ -1,10 +1,11 @@
 
 import argparse
+import datetime
 
 parser = argparse.ArgumentParser(description = "Making a new config file based on an old zed calib file and a new ros calib file.\nThe result will be a new config file in the correct format.")
 parser.add_argument("old", type=str, help="Old zed calib file")
 parser.add_argument("new", type=str, help="New ros calib file")
-parser.add_argument("updated", type=str, help="New updated filename")
+parser.add_argument("updated", help="New updated filename", nargs='?', const=1, type=str, default=datetime.datetime.now().strftime("%d_%m_%y_%H_%M_%S")+".txt")
 args = parser.parse_args()
 
 def readFromFile(filename):
@@ -139,10 +140,8 @@ def main():
    
     inputUpdatedDataLeftCamera(newData, oldData)
     inputUpdatedDataRightCamera(newData, oldData)
-
+    print(args.updated)
     makeNewConfig(args.updated,oldData)
-    
-
 
 main()
 
